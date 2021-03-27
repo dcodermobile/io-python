@@ -44,19 +44,19 @@ def getInput(key):
         data = json.loads(f.read())
         f.close()
         if "steps" not in data:
-            raise Exception("Data not exists")
+            return ''
         if blockId not in data['steps']:
-            raise Exception("Data not exists")
-        if "outputs" not in data['steps'][blockId]:
-            raise Exception("Data not exists")
+            return ''
+        if "inputs" not in data['steps'][blockId]:
+            return ''
         
-        if 'inputs' in data['steps'][blockId] and key in data['steps'][blockId]['inputs']:
+        if "inputs" in data['steps'][blockId] and key in data['steps'][blockId]['inputs']:
             return data['steps'][blockId]['inputs'][key] 
         else:
-            raise Exception("Data not exists")
+            return ''
 
     else:
-        raise Exception("Data not exists")
+        return ''
 
 def getAuthToken(key):
     data = None
@@ -67,25 +67,25 @@ def getAuthToken(key):
         data = json.loads(f.read())
         f.close()
         if "steps" not in data:
-            raise Exception("Data not exists")
+            raise Exception("Your account is not authenticated or linked.")
         if blockId not in data['steps']:
-            raise Exception("Data not exists")
+            raise Exception("Your account is not authenticated or linked.")
         if "auths" not in data['steps'][blockId]:
-            raise Exception("Data not exists")
+            raise Exception("Your account is not authenticated or linked.")
         
         if key in data['steps'][blockId]['auths'] and 'ACCESS_TOKEN' in data['steps'][blockId]['auths'][key]:
             return data['steps'][blockId]['auths'][key]['ACCESS_TOKEN']
         else:
-            raise Exception("Data not exists")
+            raise Exception("Your account is not authenticated or linked.")
 
     else:
-        raise Exception("Data not exists")
+        raise Exception("Your account is not authenticated or linked.")
 
 def getSecret(key):
     if key.upper() in os.environ:
         return os.environ.get(key.upper())
     else:
-        raise Exception("Data not exists")
+        raise Exception("Secret doesn\'t exist.")
 
 def setFailed(message):
     print(message)

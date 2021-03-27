@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='dcoderio',
-      version='0.2',
+      version='0.4',
       description='io lib for Dcoder',
       url='https://github.com/dcodermobile/io-python',
       author='dcodermobile',
